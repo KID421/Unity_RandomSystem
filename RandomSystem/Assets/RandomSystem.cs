@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,6 +8,8 @@ public class RandomSystem : MonoBehaviour
 {
     [Header("群組")]
     public GameObject group;
+    [Header("數量")]
+    public Text textCount;
 
     private Transform panel;
 
@@ -26,6 +29,7 @@ public class RandomSystem : MonoBehaviour
     public void GetCount(float count)
     {
         this.count = (int)count;
+        textCount.text = "數量：" + (int)count;
     }
 
     public void StartRandom()
@@ -50,5 +54,11 @@ public class RandomSystem : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+        panel.GetComponent<Image>().raycastTarget = true;
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
